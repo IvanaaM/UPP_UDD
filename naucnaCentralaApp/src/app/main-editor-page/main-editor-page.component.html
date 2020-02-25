@@ -1,0 +1,78 @@
+<div class=" offset-3 col-md-7" style="margin-top:20px; text-align: center;">
+ 
+    <h1 style="text-align: center; margin-bottom: 35px; margin-top: 35px;">{{title}}</h1>
+
+<table [hidden]="dataShow" style=" margin-left: 80px; text-align: center;">
+    <div [hidden]="dataShow" *ngFor="let pap of paper">
+
+        <tr *ngIf="pap.fieldId != 'pdf'"><td><b>{{pap.fieldId}}: </b></td> 
+        <td><b>{{pap.fieldValue}}  </b></td>
+        </tr>
+        
+    </div>
+</table>
+<table *ngIf="showCoauthors" style="margin-left: 80px;">
+  <tr>
+<td><b>Koautori: </b></td>
+<div *ngFor="let co of coa">
+ <td style="padding-left: 10px;">{{co}}</td>
+</div>
+
+</tr>
+</table>
+
+<div [hidden]="!dataShow" *ngFor="let l of list">
+  <br>
+  <label><b>Recenzent: </b></label> 
+  <label><b>{{l.name}}</b></label><br>
+
+  <label><b>Komentar o radu: </b></label>
+  
+  <label>{{l.comments}}</label>
+<br>
+  <label><b>Peporuka: </b></label>
+  <label><b>{{  handleRecomm(l.recomm)  }}</b></label>
+<br>
+  <label><b>Komentar za urednika: </b></label>
+  <label>{{l.commForEditor}}</label>
+<br><br>
+</div>
+
+<div style=" text-align: center; margin-bottom: 30px;">
+  
+<iframe [hidden]="!dataShow" style="width: 730px; height: 700px;"></iframe>
+<iframe [hidden]="pdfShow" style="width: 730px; height: 700px;"></iframe>
+</div>
+<div class="offset-3 col-md-6">  
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
+    
+        <div *ngFor="let field of formFields" style="margin-bottom: 25px;" >
+          <div class="form-group" style="text-align: center;">
+          
+            <label style="font-weight:bold;" for={{field.id}}>{{field.label}}</label> <br>
+          
+            <input type="text" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='string'" >
+        
+            <input type="checkbox" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
+          
+            <input type="number" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">
+      
+            <select [hidden]="dataShow" class="form-control margin" name="{{field.id}}" *ngIf="field.type.name=='enum'" multiple="multiple">
+              <option *ngFor="let val of enumValues" value={{val}}>
+                {{field.type.values[val]}}
+              </option>
+            </select>
+
+            <select [(ngModel)]="NO" [hidden]="!dataShow" class="form-control margin" name="{{field.id}}" *ngIf="field.type.name=='enum'">
+              <option *ngFor="let val of enumValues" value={{val}}>
+                {{field.type.values[val]}}
+              </option>
+            </select>
+    
+        </div>
+      </div>
+      
+      <button name="name" class="btn btn-dark" value="value" type="submit">Posalji</button>
+      </form></div>
+
+      </div>

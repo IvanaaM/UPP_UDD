@@ -1,0 +1,50 @@
+<div class="container" style="text-align: center;" >
+  <h2>Administracija</h2>
+  </div>
+
+
+  
+  <h3 style="text-align: center;" >Provera podataka za casopis</h3>
+  <div style="text-align: center;">
+    <b>
+    <label>Naziv casopisa: </label>
+    <label>{{magazine.name}}</label><br>
+  <br>
+    <label>ISSN casopisa: </label>
+    <label>{{magazine.issn}}</label><br>
+  <br>
+    <label>Nacin naplate: </label>
+    <label>{{magazine.chargeType}}</label><br>
+  
+  </b>
+  <br>
+  
+  <div class=" offset-4 col-md-4" style="margin-top:20px; text-align: center;">
+   
+      <h1 style="text-align: center; margin-bottom: 35px; margin-top: 35px;">{{fieldTitle}}</h1>
+      <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
+      
+          <div *ngFor="let field of formFields" style="margin-bottom: 25px;" >
+            <div class="form-group" style="text-align: center;">
+            
+              <label style="font-weight:bold;" for={{field.id}}>{{field.label}}</label> <br>
+            
+              <input type="text" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='string'" >
+          
+              <input type="checkbox" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
+            
+              <input type="number" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">
+        
+              <select [(ngModel)]="NO" class="form-control margin" name="{{field.id}}" *ngIf="field.type.name=='enum'" multiple="multiple">
+                <option *ngFor="let val of enumValues" value={{val}}>
+                  {{field.type.values[val]}}
+                </option>
+              </select>
+      
+          </div>
+        </div>
+        
+        <button name="name" class="btn btn-dark" value="value" type="submit">Posalji</button>
+        </form>
+        </div>
+  

@@ -1,0 +1,72 @@
+<div class=" offset-3 col-md-6" style="margin-top:20px; text-align: center;">
+ 
+<br><br>
+ 
+<h2>{{title}}</h2><br>
+
+<div *ngIf="!show" class=" offset-3 col-md-6" style="margin-top:10px; text-align: center;">
+
+<div *ngIf="!show">
+<h4>Komentari o radu</h4>
+  <div style="margin-right: 30px; margin-top: -20px;" *ngFor="let l of comms; let i = index">
+    <br>
+  
+    <label><b>Recenzent {{i+1}}: </b></label>
+    
+    <label>{{l.comments}}</label>
+ 
+  <br>
+  </div>
+</div>
+</div>
+
+<table *ngIf="show" style=" margin-left: 10px; text-align: center;">
+  <div *ngFor="let pap of paper">
+
+      <tr *ngIf="pap.fieldId != 'pdf'"><td><b>{{pap.fieldId}}: </b></td> 
+      <td><b>{{pap.fieldValue}}  </b></td>
+
+  </tr>
+      
+  </div>
+</table>
+<table *ngIf="rec" style="margin-left: 10px;">
+  <tr>
+<td><b>Koautori: </b></td>
+<div *ngFor="let co of coa">
+ <td style="padding-left: 10px;">{{co}}</td>
+</div>
+
+</tr>
+</table>
+<h5 style="float: left; margin-top: 15px; margin-bottom: 25px;" *ngIf="show"><b>Komentar urednika: {{comm}}</b></h5>
+<iframe style="width: 730px; height: 700px;"></iframe>
+<div class="offset-3 col-md-8">
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
+  
+  <div *ngFor="let field of formFields" style="margin-bottom: 25px;" >
+    <div class="form-group" style="text-align: center;">
+    
+      <label style="font-weight:bold;" for={{field.id}}>{{field.label}}</label> <br>
+    
+      <input type="text" class="form-control margin" name={{field.id}} id={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id!='pdf'" >
+  
+      <input type="checkbox" class="form-control margin" name={{field.id}} id={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
+    
+      <input type="number" class="form-control margin" name={{field.id}} id={{field.id}} ngModel  *ngIf="field.type.name=='long'">
+      <input type="file" class="form-control margin" name={{field.id}} ngModel (change)="handlePDF($event)" *ngIf="field.id=='pdf'">
+
+      <select name="field.id" [(ngModel)]="naucObl" *ngIf="field.type.name=='enum'" multiple="multiple" class="form-control margin">
+        <option class="form-control margin" *ngFor="let val of enumValues" value={{val}}>
+          {{field.type.values[val]}}
+        </option>
+      </select>
+
+  </div>
+</div>
+
+<button name="name" class="btn btn-dark" value="value" type="submit">Posalji</button>
+</form>
+</div>
+</div>>
+

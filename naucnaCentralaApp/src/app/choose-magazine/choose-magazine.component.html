@@ -1,0 +1,34 @@
+<div class=" offset-4 col-md-4" style=" margin-top:20px; text-align: center; display: inline-block;">
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
+
+  <h2>{{title}}</h2>
+  <div style=" text-align: center;">
+  <div *ngFor="let field of formFields" style="margin-bottom: 25px;" >
+    <div class="form-group" style="text-align: center;">
+    
+      <label style="font-weight:bold;" for={{field.id}}>{{field.label}}</label> <br>
+    
+      <input type="text" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='string' && field.id!='pdf'" >
+  
+      <input type="checkbox" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
+    
+      <input type="number" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">
+
+      <input type="file" class="form-control margin" name={{field.id}} ngModel (change)="handlePDF($event)" *ngIf="field.id=='pdf'">
+
+      <select [(ngModel)]="NO" class="form-control margin" name="{{field.id}}" *ngIf="field.type.name=='enum'">
+        <option *ngFor="let val of enumValues" value={{val}}>
+          {{field.type.values[val]}}
+        </option>
+      </select>
+
+  </div>
+</div>
+</div>
+
+<button name="name" class="btn btn-dark" value="value" type="submit">Posalji</button>
+</form>
+
+</div>
+
+<!--<div  style="display: inline-block;"><iframe style="margin-top: 30px; margin-left: 40px; width: 730px; height: 700px;"></iframe></div>-->

@@ -1,0 +1,9 @@
+<div>
+    <button name="buttonName" style="margin-top: 30px; margin-left: 30px;" [hidden]="!show" class="btn btn-dark" (click)="report()">Objavi rad</button>
+
+    <button class="btn btn-dark" *ngIf="noboody" style="margin-top: 30px; margin-left: 30px;" (click)="changePaper()">Obavestenja</button>
+    
+    <button class="btn btn-dark" style="margin-top: 30px; margin-left: 30px;" *ngIf="urednik" style="margin-top: 30px; margin-left: 30px;" (click)="ured()">Urednistvo</button>
+    <button class="btn btn-dark" style="margin-top: 30px; margin-left: 30px;" *ngIf="recenzent" style="margin-top: 30px; margin-left: 30px;" (click)="rec()">Recenzenti</button>
+    <button class="btn btn-dark" style="margin-top: 30px; margin-left: 30px;" *ngIf="admin" style="margin-top: 30px; margin-left: 30px;" (click)="admin2()">Administracija</button>
+</div>

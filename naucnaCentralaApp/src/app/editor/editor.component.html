@@ -1,0 +1,44 @@
+<div class="container" style="text-align: center;" >
+<h2>Urednistvo</h2>
+<button [hidden] = "show" class="btn btn-dark" (click)="createMagazine()">Kreiraj casopis</button>
+</div>
+
+<h3 style="text-align: center;" [hidden]="!show">Odabir urednika za casopis</h3>
+<div [hidden]="!show" class=" offset-4 col-md-4" style="margin-top:20px; text-align: center;">
+ 
+    <h1 style="text-align: center; margin-bottom: 35px; margin-top: 35px;">{{fieldTitle}}</h1>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
+    
+        <div *ngFor="let field of formFields" style="margin-bottom: 25px;" >
+          <div class="form-group" style="text-align: center;">
+          
+            <label style="font-weight:bold;" for={{field.id}}>{{field.label}}</label> <br>
+          
+            <input type="text" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='string'" >
+        
+            <input type="checkbox" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
+          
+            <input type="number" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">
+      
+            <select [(ngModel)]="NO" class="form-control margin" name="{{field.id}}" *ngIf="field.type.name=='enum'" multiple="multiple">
+              <option *ngFor="let val of enumValues" value={{val}}>
+                {{field.type.values[val]}}
+              </option>
+            </select>
+    
+        </div>
+      </div>
+      
+      <button name="name" class="btn btn-dark" value="value" type="submit">Posalji</button>
+      </form>
+      </div>
+<div style="margin-left: 30px;">
+      <button class="btn btn-dark" (click)="mainEditing()">Provera rada</button>
+<br><br>
+      <button class="btn btn-dark" (click)="reviewCheck()">Provera recenzija</button>
+    <br>
+    <br>  
+      <button class="btn btn-dark" (click)="setDate()">Rok</button>
+      <br><br>
+      <button class="btn btn-dark" (click)="prepare()">Odaberi recenzente</button>
+    </div>

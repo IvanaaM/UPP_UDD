@@ -1,0 +1,38 @@
+<div [hidden]=show class=" offset-4 col-md-4" style="margin-top:20px; text-align: center;">
+ 
+  <h1 style="text-align: center; margin-bottom: 35px; margin-top: 35px;"> Unos naucne oblasti</h1>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
+  
+      <div *ngFor="let field of formFields" style="margin-bottom: 25px;" >
+        <div class="form-group" style="text-align: center;">
+        
+          <label style="font-weight:bold;" for={{field.id}}>{{field.label}}</label> <br>
+        
+          <input type="text" class="form-control margin" name={{field.id}} id={{field.id}} ngModel  *ngIf="field.type.name=='string'" >
+      
+          <input type="checkbox" class="form-control margin" name={{field.id}} id={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
+        
+          <input type="number" class="form-control margin" name={{field.id}} id={{field.id}} ngModel  *ngIf="field.type.name=='long'">
+    
+          <select name="field.id" [(ngModel)]="naucObl" *ngIf="field.type.name=='enum'" multiple="multiple" class="form-control margin">
+            <option class="form-control margin" *ngFor="let val of enumValues" value={{val}}>
+              {{field.type.values[val]}}
+            </option>
+          </select>
+  
+      </div>
+    </div>
+    
+    <button name="name" class="btn btn-dark" value="value" type="submit">Posalji</button>
+    </form>
+    </div>
+
+    <div [hidden]=!show style="text-align: center;"> 
+
+      <h2>Poslat je link za aktivaciju naloga na Vas mejl!</h2>
+
+    </div>
+
+    <div [hidden]=!show2 style="text-align: center;">
+      <h2>Uspesno kreiran casopis!</h2>
+    </div>

@@ -1,0 +1,22 @@
+<div [hidden]="show" class=" offset-4 col-md-4" style="margin-top:20px; text-align: center;">
+ 
+  <h1 style="text-align: center; margin-bottom: 35px; margin-top: 35px;"> Prijava</h1>
+  
+
+  <form [formGroup]="form">
+       <div class="form-group" style="text-align: center;">
+        
+          <label style="font-weight:bold;"> Username </label> <br>
+        
+          <input type="text" [formControl]="username1" class="form-control margin" name="username1"> <br>
+
+          <label style="font-weight:bold;"> Password </label> <br>
+      
+          <input type="password" [formControl]="password1" class="form-control margin" name="password1">
+        
+    </div>
+
+    <button (click)="login()" class="btn btn-dark" style="margin-top: 15px;">Posalji</button>
+
+    </form>
+    </div>

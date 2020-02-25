@@ -1,0 +1,38 @@
+
+  <div style="text-align: center;">
+  <h2 style="margin: 0 auto; margin-left: 20px; text-align: center;">Administratorski panel</h2>
+</div>
+
+<div style=" margin-top: 50px; text-align: center;" [hidden]="show" >
+  <h2>Zahtev za recenzenta</h2>
+
+  <h3><b> <u>Korisnik:  {{name.username}}</u> </b></h3>
+
+  <div class=" offset-4 col-md-4" style="margin-top:20px; text-align: center;">
+ 
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" ngNativeValidate>
+
+      <div *ngFor="let field of formFields" style="margin-bottom: 25px;" >
+        <div class="form-group" style="text-align: center;">
+        
+          <label style="font-weight:bold;" for={{field.id}}>{{field.label}}</label> <br>
+        
+          <input type="text" class="form-control margin" [disabled]=true name={{field.id}} ngModel  *ngIf="field.type.name=='string'" >
+      
+          <input type="checkbox" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='boolean'">
+        
+          <input type="number" class="form-control margin" name={{field.id}} ngModel  *ngIf="field.type.name=='long'">
+    
+          <select [(ngModel)]="NO" class="form-control margin" name="{{field.id}}" *ngIf="field.type.name=='enum'" multiple="multiple">
+            <option *ngFor="let val of enumValues" value={{val}}>
+              {{field.type.values[val]}}
+            </option>
+          </select>
+  
+      </div>
+    </div>
+    
+    <button name="name" class="btn btn-dark" value="value" type="submit">Posalji</button>
+    </form>
+      </div>
+</div>

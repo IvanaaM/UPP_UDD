@@ -1,0 +1,11 @@
+<div class="jumbotron" *ngFor="let magazine of magazines"
+style="display: inline-block; text-align: center; margin-right: 15px;border-radius: 25px; width: 400px;  text-align: center; margin-top: 25px; border-style: solid; border-color: lightslategray">
+
+<h2>{{magazine.name}}</h2>
+<h5>Naucne oblasti:</h5>
+<ng-container *ngFor="let area of magazine.areas">
+  <b>{{area.naziv}}       </b>
+</ng-container><br>
+<button class="btn btn-dark" style="margin-top: 15px;" (click)="createPaper(magazine.id)" >Objavi rad</button>
+
+</div>
